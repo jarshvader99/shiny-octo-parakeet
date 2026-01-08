@@ -161,7 +161,7 @@ These guidelines may be updated as our community evolves. Significant changes wi
 
 ## Contact
 
-Questions about these guidelines? Contact us at [guidelines@congressionalconsensus.com](mailto:guidelines@congressionalconsensus.com)
+Questions about these guidelines? Contact us at [guidelines@congressionalconsensus.com](mailto:congressionalconsensus@gmail.com)
 
 ---
 
