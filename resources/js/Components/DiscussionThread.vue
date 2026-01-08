@@ -81,7 +81,7 @@ const deleteComment = (commentId) => {
                             {{ comment.user.name.charAt(0).toUpperCase() }}
                         </div>
                         <div>
-                            <div class="font-medium text-slate-200">{{ comment.user.name }}</div>
+                            <div class="font-medium text-slate-400">{{ comment.user.name }}</div>
                             <div class="text-xs text-slate-600">
                                 {{ formatDate(comment.created_at) }}
                                 <span v-if="comment.updated_at !== comment.created_at" class="ml-1">(edited)</span>
@@ -156,7 +156,7 @@ const deleteComment = (commentId) => {
                                     {{ reply.user.name.charAt(0).toUpperCase() }}
                                 </div>
                                 <div>
-                                    <div class="text-sm font-medium text-slate-200">{{ reply.user.name }}</div>
+                                    <div class="text-sm font-medium text-slate-400">{{ reply.user.name }}</div>
                                     <div class="text-xs text-slate-600">{{ formatDate(reply.created_at) }}</div>
                                 </div>
                             </div>

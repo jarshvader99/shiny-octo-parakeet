@@ -124,7 +124,7 @@ const getStanceClasses = (color) => {
                             required
                         />
                         <div class="flex-1">
-                            <div class="font-medium text-slate-200">{{ option.label }}</div>
+                            <div class="font-medium text-slate-400">{{ option.label }}</div>
                             <div :id="`stance-${option.value}-desc`" class="text-sm text-slate-600">{{ option.description }}</div>
                         </div>
                     </label>
