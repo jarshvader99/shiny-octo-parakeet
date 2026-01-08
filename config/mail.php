@@ -38,13 +38,8 @@ return [
     'mailers' => [
 
         'sendgrid' => [
-            'transport' => 'smtp',
-            'host' => 'smtp.sendgrid.net',
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => 'apikey',
-            'password' => env('SENDGRID_API_KEY'),
-            'timeout' => null,
+            'transport' => 'sendgrid',
+            'key' => env('SENDGRID_API_KEY'),
         ],
 
         'smtp' => [
