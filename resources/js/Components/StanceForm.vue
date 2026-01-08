@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { ref, computed } from 'vue'
+import { useForm, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
     billId: {
@@ -15,9 +15,13 @@ const props = defineProps({
 
 const emit = defineEmits(['submitted', 'cancelled'])
 
+const page = usePage()
+const hasAcceptedGuidelines = computed(() => page.props.auth?.user?.has_accepted_guidelines ?? false)
+
 const form = useForm({
     stance: props.existingStance?.stance || '',
     reason: props.existingStance?.reason || '',
+    accept_guidelines: false,
 })
 
 const stanceOptions = [
@@ -205,6 +209,34 @@ const getStanceClasses = (color) => {
                             You can revise your stance at any time. Previous versions are preserved for your own records.
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Guidelines Consent (first-time only) -->
+            <div v-if="!hasAcceptedGuidelines" class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <label class="flex items-start gap-3 cursor-pointer">
+                    <input
+                        v-model="form.accept_guidelines"
+                        type="checkbox"
+                        class="mt-1 rounded border-amber-300 text-teal-600 focus:ring-amber-500"
+                    />
+                    <div class="text-sm text-slate-700">
+                        <span class="font-medium">I agree to the </span>
+                        <a 
+                            href="/community-guidelines" 
+                            target="_blank" 
+                            class="text-teal-600 hover:text-teal-500 underline"
+                        >
+                            Community Guidelines
+                        </a>
+                        <span class="font-medium"> and will engage respectfully and in good faith.</span>
+                        <p class="mt-2 text-xs text-slate-500">
+                            This is a one-time acknowledgment. You won't need to accept again for future submissions.
+                        </p>
+                    </div>
+                </label>
+                <div v-if="form.errors.accept_guidelines" class="mt-2 text-sm text-rose-700" role="alert">
+                    {{ form.errors.accept_guidelines }}
                 </div>
             </div>
 

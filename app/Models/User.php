@@ -41,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'zip_code',
         'congressional_district',
+        'guidelines_accepted_at',
     ];
 
     /**
@@ -74,8 +75,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'zip_code_verified_at' => 'datetime',
+            'guidelines_accepted_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if user has accepted community guidelines.
+     */
+    public function hasAcceptedGuidelines(): bool
+    {
+        return !is_null($this->guidelines_accepted_at);
+    }
+
+    /**
+     * Accept community guidelines.
+     */
+    public function acceptGuidelines(): void
+    {
+        $this->update(['guidelines_accepted_at' => now()]);
     }
 
     /**

@@ -19,6 +19,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/community-guidelines', function () {
+    $guidelines = file_get_contents(resource_path('markdown/guidelines.md'));
+    return Inertia::render('CommunityGuidelines', [
+        'guidelines' => \Illuminate\Support\Str::markdown($guidelines),
+    ]);
+})->name('community-guidelines');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

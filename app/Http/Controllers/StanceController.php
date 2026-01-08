@@ -13,6 +13,20 @@ class StanceController extends Controller
      */
     public function store(Request $request, Bill $bill)
     {
+        $user = $request->user();
+
+        // Check if user has accepted guidelines (first-time submission)
+        if (!$user->hasAcceptedGuidelines()) {
+            $request->validate([
+                'accept_guidelines' => 'required|accepted',
+            ], [
+                'accept_guidelines.required' => 'You must accept the Community Guidelines to submit a stance.',
+                'accept_guidelines.accepted' => 'You must accept the Community Guidelines to submit a stance.',
+            ]);
+
+            $user->acceptGuidelines();
+        }
+
         $validated = $request->validate([
             'stance' => 'required|in:support,oppose,mixed,undecided,needs_more_info',
             'reason' => 'required|string|min:50|max:5000',
@@ -20,8 +34,6 @@ class StanceController extends Controller
             'reason.min' => 'Please provide a substantive reason (at least 50 characters).',
             'reason.max' => 'Reason must not exceed 5000 characters.',
         ]);
-
-        $user = $request->user();
 
         // Get existing stance if any
         $existingStance = UserStance::where('user_id', $user->id)

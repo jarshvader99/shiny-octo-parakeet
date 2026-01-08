@@ -33,6 +33,20 @@ class DiscussionController extends Controller
      */
     public function storeComment(Request $request, Bill $bill, Discussion $discussion)
     {
+        $user = $request->user();
+
+        // Check if user has accepted guidelines (first-time submission)
+        if (!$user->hasAcceptedGuidelines()) {
+            $request->validate([
+                'accept_guidelines' => 'required|accepted',
+            ], [
+                'accept_guidelines.required' => 'You must accept the Community Guidelines to post a comment.',
+                'accept_guidelines.accepted' => 'You must accept the Community Guidelines to post a comment.',
+            ]);
+
+            $user->acceptGuidelines();
+        }
+
         $validated = $request->validate([
             'content' => 'required|string|min:10|max:5000',
             'parent_id' => 'nullable|exists:comments,id',
@@ -41,7 +55,7 @@ class DiscussionController extends Controller
         // Create comment
         $comment = Comment::create([
             'discussion_id' => $discussion->id,
-            'user_id' => $request->user()->id,
+            'user_id' => $user->id,
             'parent_id' => $validated['parent_id'] ?? null,
             'content' => $validated['content'],
             'bill_version_id' => $bill->latestVersion()?->id,
