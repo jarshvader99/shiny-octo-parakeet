@@ -31,6 +31,40 @@ const submit = () => {
             <AuthenticationCardLogo />
         </template>
 
+        <!-- Call to Action Header -->
+        <div class="mb-6 text-center">
+            <h2 class="text-xl font-semibold text-slate-900 mb-2">
+                Join the Civic Conversation
+            </h2>
+            <p class="text-sm text-slate-600">
+                Create your free account to review bills, share your informed perspective, and see how your community feels about legislation.
+            </p>
+        </div>
+
+        <!-- Value Props -->
+        <div class="mb-6 p-4 bg-teal-50 border border-teal-100 rounded-lg">
+            <ul class="space-y-2 text-sm text-slate-700">
+                <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>See bills from <strong>your</strong> representatives first</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Submit reasoned stances, not just votes</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Visualize regional consensus on legislation</span>
+                </li>
+            </ul>
+        </div>
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />
