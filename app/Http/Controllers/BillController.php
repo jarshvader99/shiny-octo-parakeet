@@ -33,6 +33,28 @@ class BillController extends Controller
             perPage: 20
         );
 
+        // Transform the bills while preserving pagination
+        $bills->through(function ($bill) use ($request) {
+            return [
+                'id' => $bill->id,
+                'identifier' => $bill->identifier,
+                'title' => $bill->title,
+                'summary' => $bill->summary,
+                'status' => $bill->status,
+                'status_display' => ucwords(str_replace('_', ' ', $bill->status)),
+                'chamber' => $bill->chamber,
+                'last_action_at' => $bill->last_action_at,
+                'stances_count' => $bill->stances_count,
+                'followers_count' => $bill->followers_count,
+                'comments_count' => $bill->comments_count,
+                'is_locally_relevant' => $request->user() ? $this->localBillService->isLocallyRelevant($bill, $request->user()) : false,
+                'sponsor' => $bill->sponsor() ? [
+                    'name' => $bill->sponsor()->name,
+                    'party' => $bill->sponsor()->party,
+                ] : null,
+            ];
+        });
+
         return Inertia::render('Bills/Index', [
             'bills' => $bills,
             'filters' => [

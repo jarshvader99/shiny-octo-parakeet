@@ -50,6 +50,10 @@ Route::middleware([
                     'summary' => $bill->summary,
                     'status_display' => ucwords(str_replace('_', ' ', $bill->status)),
                     'chamber' => $bill->chamber,
+                    'last_action_at' => $bill->last_action_at?->diffForHumans(),
+                    'stances_count' => $bill->stances_count,
+                    'followers_count' => $bill->followers_count,
+                    'comments_count' => $bill->comments_count,
                     'sponsor' => $bill->sponsor() ? [
                         'name' => $bill->sponsor()->name,
                         'party' => $bill->sponsor()->party,
@@ -62,6 +66,10 @@ Route::middleware([
                     'summary' => $bill->summary,
                     'status_display' => ucwords(str_replace('_', ' ', $bill->status)),
                     'chamber' => $bill->chamber,
+                    'last_action_at' => $bill->last_action_at?->diffForHumans(),
+                    'stances_count' => $bill->stances_count,
+                    'followers_count' => $bill->followers_count,
+                    'comments_count' => $bill->comments_count,
                     'sponsor' => $bill->sponsor() ? [
                         'name' => $bill->sponsor()->name,
                         'party' => $bill->sponsor()->party,

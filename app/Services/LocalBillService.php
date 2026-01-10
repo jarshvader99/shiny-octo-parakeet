@@ -48,7 +48,7 @@ class LocalBillService
                 });
             })
             ->with(['actors' => fn($q) => $q->where('is_primary', true), 'events' => fn($q) => $q->latest()->limit(3)])
-            ->withCount('stances', 'followers')
+            ->withCount('stances', 'followers', 'comments')
             ->orderBy('last_action_at', 'desc')
             ->limit($limit)
             ->get();
@@ -62,7 +62,7 @@ class LocalBillService
         return Bill::query()
             ->where('is_national', true)
             ->with(['actors' => fn($q) => $q->where('is_primary', true), 'events' => fn($q) => $q->latest()->limit(3)])
-            ->withCount('stances', 'followers')
+            ->withCount('stances', 'followers', 'comments')
             ->orderBy('last_action_at', 'desc')
             ->limit($limit)
             ->get();
@@ -81,7 +81,7 @@ class LocalBillService
     ) {
         $query = Bill::query()
             ->with(['actors' => fn($q) => $q->where('is_primary', true), 'events' => fn($q) => $q->latest()->limit(3)])
-            ->withCount('stances', 'followers');
+            ->withCount('stances', 'followers', 'comments');
 
         if ($keyword) {
             $query->where(function (Builder $q) use ($keyword) {

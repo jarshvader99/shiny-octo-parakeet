@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Bill extends Model
 {
@@ -266,5 +267,13 @@ class Bill extends Model
     public function discussions(): HasMany
     {
         return $this->hasMany(Discussion::class);
+    }
+
+    /**
+     * Get all comments across all discussions for this bill.
+     */
+    public function comments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Comment::class, Discussion::class);
     }
 }
