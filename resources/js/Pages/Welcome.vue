@@ -134,22 +134,7 @@ const features = [
                         Learn More
                     </a>
                 </div>
-
-                <!-- Trust Indicators -->
-                <div class="grid grid-cols-3 gap-6 pt-12 mt-12 border-t border-stone-200">
-                    <div class="text-center">
-                        <div class="mb-2 text-3xl font-bold text-teal-600">100%</div>
-                        <div class="text-sm text-slate-600">Verified Data from Congress.gov</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="mb-2 text-3xl font-bold text-teal-600">Open Source</div>
-                        <div class="text-sm text-slate-600">Transparent & Community-Driven</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="mb-2 text-3xl font-bold text-teal-600">Non-Partisan</div>
-                        <div class="text-sm text-slate-600">No Editorial Spin or Bias</div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
