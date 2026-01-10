@@ -27,7 +27,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
         </template>
 
         <div class="mb-4 text-sm text-gray-600 ">
-            Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+            Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another. <strong>Please check your spam folder, then add us to your known contacts to ensure you get future updates!</strong> <a href="mailto:congressionalconsensus@gmail.com">congressionalconsensus@gmail.com</a>
         </div>
 
         <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
