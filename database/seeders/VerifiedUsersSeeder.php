@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\ZipCode;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -16,6 +17,8 @@ class VerifiedUsersSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+        
         $this->command->info('Creating 300 verified users across 50 states...');
 
         // Sample ZIP codes for each state (one representative ZIP per state)
@@ -84,14 +87,14 @@ class VerifiedUsersSeeder extends Seeder
                 $district = "{$stateCode}-" . str_pad($districtNum, 2, '0', STR_PAD_LEFT);
 
                 User::create([
-                    'name' => fake()->name(),
-                    'email' => fake()->unique()->safeEmail(),
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
                     'email_verified_at' => now(),
                     'password' => Hash::make('CRazyhorse21@!'),
                     'remember_token' => Str::random(10),
                     'zip_code' => $zip,
                     'congressional_district' => $district,
-                    'guidelines_accepted_at' => fake()->boolean(70) ? now() : null, // 70% have accepted guidelines
+                    'guidelines_accepted_at' => $faker->boolean(70) ? now() : null, // 70% have accepted guidelines
                 ]);
 
                 $usersCreated++;
