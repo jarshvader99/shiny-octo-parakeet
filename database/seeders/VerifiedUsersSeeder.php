@@ -4,21 +4,34 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\ZipCode;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class VerifiedUsersSeeder extends Seeder
 {
+    protected $firstNames = [
+        'James', 'Mary', 'Robert', 'Patricia', 'John', 'Jennifer', 'Michael', 'Linda', 'David', 'Elizabeth',
+        'William', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica', 'Thomas', 'Sarah', 'Christopher', 'Karen',
+        'Charles', 'Lisa', 'Daniel', 'Nancy', 'Matthew', 'Betty', 'Anthony', 'Margaret', 'Mark', 'Sandra',
+        'Donald', 'Ashley', 'Steven', 'Kimberly', 'Paul', 'Emily', 'Andrew', 'Donna', 'Joshua', 'Michelle',
+        'Kenneth', 'Dorothy', 'Kevin', 'Carol', 'Brian', 'Amanda', 'George', 'Melissa', 'Timothy', 'Deborah',
+    ];
+
+    protected $lastNames = [
+        'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
+        'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin',
+        'Lee', 'Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson',
+        'Walker', 'Young', 'Allen', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores',
+        'Green', 'Adams', 'Nelson', 'Baker', 'Hall', 'Rivera', 'Campbell', 'Mitchell', 'Carter', 'Roberts',
+    ];
+
     /**
      * Run the database seeds.
      * Creates 300 verified users equally distributed among all 50 states (6 per state).
      */
     public function run(): void
     {
-        $faker = Faker::create();
-        
         $this->command->info('Creating 300 verified users across 50 states...');
 
         // Sample ZIP codes for each state (one representative ZIP per state)
@@ -86,15 +99,18 @@ class VerifiedUsersSeeder extends Seeder
                 $districtNum = ($i % 3) + 1; // Cycles through districts 1-3
                 $district = "{$stateCode}-" . str_pad($districtNum, 2, '0', STR_PAD_LEFT);
 
+                $name = $this->firstNames[array_rand($this->firstNames)] . ' ' . $this->lastNames[array_rand($this->lastNames)];
+                $email = strtolower(Str::slug($name, '.')) . '.' . Str::random(4) . '@example.com';
+
                 User::create([
-                    'name' => $faker->name(),
-                    'email' => $faker->unique()->safeEmail(),
+                    'name' => $name,
+                    'email' => $email,
                     'email_verified_at' => now(),
                     'password' => Hash::make('CRazyhorse21@!'),
                     'remember_token' => Str::random(10),
                     'zip_code' => $zip,
                     'congressional_district' => $district,
-                    'guidelines_accepted_at' => $faker->boolean(70) ? now() : null, // 70% have accepted guidelines
+                    'guidelines_accepted_at' => rand(1, 10) <= 7 ? now() : null, // 70% have accepted guidelines
                 ]);
 
                 $usersCreated++;
