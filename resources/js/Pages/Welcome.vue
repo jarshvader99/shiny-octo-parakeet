@@ -233,8 +233,8 @@ const features = [
 
         <!-- CTA Section -->
         <div class="px-4 py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="p-12 text-center border bg-gradient-to-br from-indigo-950/40 to-slate-900 border-stone-200 rounded-2xl">
-                <h2 class="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+            <div class="p-12 text-center bg-slate-100 border border-slate-700 rounded-2xl">
+                <h2 class="mb-4 text-3xl font-bold text-slate-800 sm:text-4xl">
                     Ready to Make Your Voice Heard?
                 </h2>
                 <p class="max-w-2xl mx-auto mb-8 text-lg text-slate-700">
